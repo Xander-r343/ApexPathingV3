@@ -4,6 +4,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+<<<<<<< HEAD
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+=======
+>>>>>>> 5e9d75400a1896ae8936189bff63bffa3688d89b
 import java.util.List;
 
 /**
@@ -23,6 +28,11 @@ public class MecanumDrive extends Drivetrain{
     DcMotorEx rf;
     DcMotorEx rr;
 
+<<<<<<< HEAD
+    boolean useBrakeMode;
+
+=======
+>>>>>>> 5e9d75400a1896ae8936189bff63bffa3688d89b
     //Constructor
     public MecanumDrive(HardwareMap hardwareMap, MecanumConstants constants, List<DcMotorEx> motors, double[] lastMotorPowers){
         this.mechconstants = constants;
@@ -45,6 +55,16 @@ public class MecanumDrive extends Drivetrain{
      * @param strafe the power to strafe
      * @param turn the power to turn
      */
+<<<<<<< HEAD
+
+    /**
+     * sets the calculated powers of each motor
+     * @param drive power to drive forward
+     * @param strafe power to strafe
+     * @param turn power to turn
+     */
+=======
+>>>>>>> 5e9d75400a1896ae8936189bff63bffa3688d89b
     public void setPowers(double drive, double strafe, double turn){
         double [] powers = calculatePower(drive, strafe, turn);
         lf.setPower(powers[0]);
@@ -69,6 +89,16 @@ public class MecanumDrive extends Drivetrain{
         //return
         return  calculatedPowers;
     }
+<<<<<<< HEAD
+
+    /**
+     * robot centric drive
+     * @param x
+     * @param y
+     * @param turn
+     */
+=======
+>>>>>>> 5e9d75400a1896ae8936189bff63bffa3688d89b
     public void botCentricDrive(double x, double y, double turn) {
         double adjX = deadzone(x, 0.05);
         double adjY = deadzone(y, 0.05);
@@ -84,6 +114,34 @@ public class MecanumDrive extends Drivetrain{
         normalizePowers(powers);
         runDrive(powers);
     }
+<<<<<<< HEAD
+
+    /**
+     * field centric drive
+     * @param x
+     * @param y
+     * @param turn
+     * @param robotHeading
+     */
+    public void fieldCentricDrive(double x, double y, double turn, double robotHeading) {
+        double cos    = Math.cos(-robotHeading);
+        double sin    = Math.sin(-robotHeading);
+        double fieldX = deadzone(x * cos - y * sin, 0.05);
+        double fieldY = deadzone(x * sin + y * cos, 0.05);
+        double adjTurn = deadzone(turn, 0.05);
+
+        double[] powers = {
+                fieldY + fieldX + adjTurn,  // left front
+                fieldY - fieldX + adjTurn,  // left rear
+                fieldY - fieldX - adjTurn,  // right front
+                fieldY + fieldX - adjTurn   // right rear
+        };
+
+        normalizePowers(powers);
+        runDrive(powers);
+    }
+=======
+>>>>>>> 5e9d75400a1896ae8936189bff63bffa3688d89b
     private static double deadzone(double value, double threshold) {
         return Math.abs(value) < threshold ? 0.0 : value;
     }
@@ -105,6 +163,25 @@ public class MecanumDrive extends Drivetrain{
             }
         }
     }
+<<<<<<< HEAD
+    public void breakFollowing() {
+        for (int i = 0; i < motors.size(); i++) lastMotorPowers[i] = 0;
+        setPower(0);
+        if (useBrakeMode) setMotorsToBrake();
+        else setMotorsToFloat();
+    }
+    private void setMotorsToBrake() {
+        setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    private void setMotorsToFloat() {
+        setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+    }
+
+    /** Syncs live constants (useful with FTC Dashboard). */
+    //abstract overrides
+=======
+>>>>>>> 5e9d75400a1896ae8936189bff63bffa3688d89b
     @Override
     public void setPower(DcMotorEx motor, double power) {
         motor.setPower(power);
@@ -116,4 +193,47 @@ public class MecanumDrive extends Drivetrain{
             motor.setPower(power);
         }
     }
+<<<<<<< HEAD
+
+    @Override
+    public void setPower(double power) {
+        lf.setPower(power);
+        lr.setPower(power);
+        rf.setPower(power);
+        rr.setPower(power);
+    }
+
+    @Override
+    public void initDrive(HardwareMap hardwareMap, String lfName, String rfName, String lrName, String rrName) {
+        lf = hardwareMap.get(DcMotorEx.class, lfName);
+        rf = hardwareMap.get(DcMotorEx.class, rfName);
+        lr = hardwareMap.get(DcMotorEx.class, lrName);
+        rr = hardwareMap.get(DcMotorEx.class, rrName);
+    }
+
+    public void setZeroPowerBehavior(DcMotor.ZeroPowerBehavior behavior) {
+        lf.setZeroPowerBehavior(behavior);
+        lr.setZeroPowerBehavior(behavior);
+        rf.setZeroPowerBehavior(behavior);
+        rr.setZeroPowerBehavior(behavior);
+    }
+
+    //debuggig/tuning
+    public void logMotors(Telemetry telemetry) {
+        telemetry.addLine("---Power---");
+
+        telemetry.addData("leftFront Power", lf.getPower());
+        telemetry.addData("rightFront Power", rf.getPower());
+        telemetry.addData("leftRear Power", lr.getPower());
+        telemetry.addData("rightRear Power", rr.getPower());
+
+        telemetry.addLine("---Velocity---");
+
+        telemetry.addData("leftFront velocity", lf.getVelocity());
+        telemetry.addData("rightFront velocity", rf.getVelocity());
+        telemetry.addData("leftRear velocity", lr.getVelocity());
+        telemetry.addData("rightRear velocity", rr.getVelocity());
+    }
+=======
+>>>>>>> 5e9d75400a1896ae8936189bff63bffa3688d89b
 }
