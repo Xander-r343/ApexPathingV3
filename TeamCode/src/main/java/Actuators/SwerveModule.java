@@ -1,5 +1,6 @@
 package Actuators;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -15,18 +16,18 @@ import drivetrains.constants.SwerveConstants;
 public class SwerveModule {
     public AxonAndAbsEncoderData servoConstants;
 
-    public DcMotorEx motor;
+    public MotorEx motor;
     public ServoController servoController;
 
     /**
      * default constructor
      * @param hardwareMap the hardwareMapping
-     * @param motorName is a string
+     * @param motor is the motor to give the class
      */
-    public SwerveModule(HardwareMap hardwareMap, String motorName){
+    public SwerveModule(HardwareMap hardwareMap, MotorEx motor){
         servoConstants = new AxonAndAbsEncoderData();
         servoController = new ServoController(servoConstants, hardwareMap);
-        motor = hardwareMap.get(DcMotorEx.class, motorName);
+        this.motor = motor;
     }
 
     /**
@@ -34,7 +35,7 @@ public class SwerveModule {
      * @param power is the power to run to (0.0 to 1.0)
      */
     public void setDutyCycle(double power){
-        motor.setPower(power);
+        motor.motor.setPower(power);
     }
 
     /**
@@ -66,7 +67,7 @@ public class SwerveModule {
      * @return a double from 0.0 - 1.0
      */
     public double getPower(){
-        return motor.getPower();
+        return motor.motor.getPower();
     }
 
     /**
@@ -74,7 +75,7 @@ public class SwerveModule {
      * @return the current in amps
      */
     public double getMotorCurrent(){
-        return motor.getCurrent(CurrentUnit.AMPS);
+        return motor.motor.getCurrent(CurrentUnit.AMPS);
     }
 
 
