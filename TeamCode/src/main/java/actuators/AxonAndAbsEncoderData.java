@@ -1,7 +1,6 @@
-package Actuators;
+package actuators;
 
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 /**
  * Holds Data for the Servo and its corresponding Absolute Encoder

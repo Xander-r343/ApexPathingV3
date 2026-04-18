@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-import Actuators.SwerveModule;
+import actuators.SwerveModule;
 import drivetrains.constants.SwerveConstants;
-import Actuators.MotorEx;
+import actuators.MotorEx;
 
 /**
  * @author Xander Haemel
