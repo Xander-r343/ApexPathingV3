@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import drivetrains.constants.SwerveConstants;
-import motors.MotorEx;
+import Actuators.MotorEx;
 
 /**
  * @author Xander Haemel

@@ -21,6 +21,7 @@ public class MotorEx {
         setBrakeMode(data.getBrakeMode());
     }
 
+
     public void setRunMode(DcMotor.RunMode mode) {
         motor.setMode(mode);
         data.setRunMode(mode);

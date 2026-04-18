@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 
 import controllers.pidf.PIDFCoefficients;
-import motors.MotorMetaData;
+import Actuators.MotorMetaData;
 
 /**
  * Mecanum drivetrain constants class

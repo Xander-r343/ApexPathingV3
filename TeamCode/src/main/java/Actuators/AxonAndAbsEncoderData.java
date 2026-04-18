@@ -32,7 +32,7 @@ public class AxonAndAbsEncoderData {
      * sets the cr servo direction
      * @param direction is the new direction
      */
-    public void setDirection(CRServo.Direction direction){
+    public void setServoDirection(CRServo.Direction direction){
         this.direction = direction;
     }
 
