@@ -3,7 +3,7 @@ package drivetrains.constants;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 
-import actuators.MotorMetaData;
+import hardware.MotorMetaData;
 
 /**
  * Mecanum drivetrain constants class

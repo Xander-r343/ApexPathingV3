@@ -1,4 +1,4 @@
-package actuators;
+package hardware;
 
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;

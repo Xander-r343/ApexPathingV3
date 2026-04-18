@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-import actuators.SwerveModule;
+import hardware.SwerveModule;
 import drivetrains.constants.SwerveConstants;
-import actuators.MotorEx;
+import hardware.MotorEx;
 
 /**
  * @author Xander Haemel
@@ -97,9 +97,9 @@ public class Swerve extends Drivetrain{
         if(frontLeftSpeed> max){
             max = frontLeftSpeed;
         } if(rearLeftSpeed> max){
-            max = frontLeftSpeed;
+            max = rearLeftSpeed;
         } if(rearRightSpeed> max){
-            max = frontLeftSpeed;
+            max = rearRightSpeed;
         }
         //scale down if powers are greater than 1
         if(max > 1){

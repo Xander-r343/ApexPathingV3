@@ -2,7 +2,7 @@ package drivetrains.constants;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import actuators.MotorMetaData;
+import hardware.MotorMetaData;
 
 /**
  * Swerve drivetrain constants class

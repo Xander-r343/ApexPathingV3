@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import drivetrains.constants.MecanumConstants;
-import actuators.MotorEx;
+import hardware.MotorEx;
 
 /**
  * Mecanum Drivetrain controller class
