@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import hardware.SwerveModule;
 import drivetrains.constants.SwerveConstants;
 import hardware.MotorEx;
+import util.XaddyUnit;
 
 /**
  * @author Xander Haemel
@@ -87,37 +88,45 @@ public class Swerve extends Drivetrain{
         double rearRightSpeed = Math.sqrt(Math.pow(strafeRear,2) + Math.pow(forwardRight, 2));
 
         //optimize and calculate wheel angles rather than turning 180 degrees
-        double frontRightAngle = optimizeWheelAngle(fr.getPodHeading(), Math.atan2(strafeFront, forwardRight)*180/Math.PI, frontRightSpeed);
-        double frontLeftAngle  = optimizeWheelAngle(fl.getPodHeading(), Math.atan2(strafeFront, forwardLeft)*180/Math.PI,  frontLeftSpeed);
-        double rearLeftAngle   = optimizeWheelAngle(rl.getPodHeading(), Math.atan2(strafeRear, forwardLeft)*180/Math.PI, rearLeftSpeed);
-        double rearRightAngle  = optimizeWheelAngle(rr.getPodHeading(), Math.atan2(strafeRear,forwardRight)*180/Math.PI, rearRightSpeed);
+
+        XaddyUnit frontRight = optimizeWheelAngle(fr.getPodHeading(), Math.atan2(strafeFront, forwardRight)*180/Math.PI, frontRightSpeed);
+        XaddyUnit frontLeft  = optimizeWheelAngle(fl.getPodHeading(), Math.atan2(strafeFront, forwardLeft)*180/Math.PI,  frontLeftSpeed);
+        XaddyUnit rearLeft   = optimizeWheelAngle(rl.getPodHeading(), Math.atan2(strafeRear, forwardLeft)*180/Math.PI, rearLeftSpeed);
+        XaddyUnit rearRight  = optimizeWheelAngle(rr.getPodHeading(), Math.atan2(strafeRear,forwardRight)*180/Math.PI, rearRightSpeed);
 
         //scale powers to be =<1
-        double max = frontRightSpeed;
-        if(frontLeftSpeed> max){
-            max = frontLeftSpeed;
-        } if(rearLeftSpeed> max){
-            max = rearLeftSpeed;
-        } if(rearRightSpeed> max){
-            max = rearRightSpeed;
+        double max = frontRight.getMotorPower();
+        if(frontLeft.getMotorPower()> max){
+            max = frontLeft.getMotorPower();
+        } if(rearLeft.getMotorPower() > max){
+            max = rearLeft.getMotorPower();
+        } if(rearRight.getMotorPower()> max){
+            max = rearRight.getMotorPower();
         }
         //scale down if powers are greater than 1
-        if(max > 1){
-            frontRightSpeed /= max;
+       /* if(max > 1){
+            frontRight.setMotorSpeed(forwardRight./= max;
             frontLeftSpeed  /= max;
             rearLeftSpeed   /= max;
             rearRightSpeed  /= max;
-        }
+        }*/ //todo fix power scaling
     }
 
-    private double optimizeWheelAngle(double currentAngle, double targetAngle, double power){
+    /**
+     * optimizes wheel angle by flipping the motor direction when possible
+     * @param currentAngle is the angle of the current pod (degrees)
+     * @param targetAngle is the target angle for the pod (degrees)
+     * @param power the power of the swerve pod 0.0-1.0
+     * @return the pod angle (degrees)
+     */
+    private XaddyUnit optimizeWheelAngle(double currentAngle, double targetAngle, double power){
         double delta = targetAngle- currentAngle;
         double wrappedDelta = delta - (360 * Math.round(delta /360.0));
         if(Math.abs(wrappedDelta) > 90){
             power *= -1;
             wrappedDelta -= Math.copySign(180, wrappedDelta);
         }
-        return currentAngle + wrappedDelta;
+        return new XaddyUnit(power, currentAngle + wrappedDelta);
     }
 
     @Override
