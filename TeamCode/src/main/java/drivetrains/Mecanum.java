@@ -52,15 +52,7 @@ public class Mecanum extends Drivetrain {
      * @param brPower the power to set for the right rear motor
      */
     private void setPowers(double flPower, double blPower, double frPower, double brPower) {
-        //current limiting
-        double currentRatio = getTotalCurrent() /constants.currentLimit;
-        //normalizer current
-        if(getTotalCurrent() > constants.currentLimit){
-            flPower /= currentRatio;
-            frPower /= currentRatio;
-            blPower /= currentRatio;
-            brPower /= currentRatio;
-        }
+
         // Normalize powers from -maxPower to maxPower if any exceed the max
         double max = Math.max(0, Math.abs(flPower));
         max = Math.max(max, Math.abs(blPower));
@@ -72,7 +64,15 @@ public class Mecanum extends Drivetrain {
             frPower = (frPower / max) * constants.maxPower;
             brPower = (brPower / max) * constants.maxPower;
         }
-
+        //current limiting
+        double currentRatio = getTotalCurrent() /constants.currentLimit;
+        //normalizer current
+        if(getTotalCurrent() > constants.currentLimit){
+            flPower /= currentRatio;
+            frPower /= currentRatio;
+            blPower /= currentRatio;
+            brPower /= currentRatio;
+        }
         flMotor.setPower(flPower);
         blMotor.setPower(blPower);
         frMotor.setPower(frPower);

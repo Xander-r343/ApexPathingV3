@@ -55,7 +55,7 @@ public class SwerveConstants extends DrivetrainConstants {
 
     /** @return the maximum current for the drivetrain
      */
-    public double getTotalMaxCurrent(){return this.totalMaxCurrent; }
+    public double MaxCurrentThreshold(){return this.totalMaxCurrent; }
     /**
      * Sets the front left module constants.
      * @param constants the {@link SwerveModuleConstants} to use for the front left module
