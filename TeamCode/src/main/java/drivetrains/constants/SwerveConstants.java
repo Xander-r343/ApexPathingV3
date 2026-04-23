@@ -30,7 +30,7 @@ public class SwerveConstants extends DrivetrainConstants {
     public double maxPower = 1.0; // Max power to apply to any module's motor, from 0 to 1
     public boolean robotCentric = true; // Whether to use robot-centric controls (true) or field-centric controls (false) in TeleOp
 
-    public double totalMaxCurrent = 8; //amps
+    private double totalMaxCurrent = 8; //amps
 
     /** Constructor for the SwerveConstants class */
     public SwerveConstants() {}

@@ -66,9 +66,9 @@ public class Swerve extends Drivetrain {
         double brPower = Math.sqrt(Math.pow(strafeRear, 2) + Math.pow(forwardRight, 2));
 
         //current limiting
-        double currentRatio = getTotalCurrent()/constants.totalMaxCurrent;
+        double currentRatio = getTotalCurrent()/constants.getTotalMaxCurrent();
         //normalizer current
-        if(getTotalCurrent() > constants.totalMaxCurrent){
+        if(getTotalCurrent() > constants.getTotalMaxCurrent()){
             flPower /= currentRatio;
             frPower /= currentRatio;
             blPower /= currentRatio;
